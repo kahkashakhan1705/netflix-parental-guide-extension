@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "Netflix IMDb Parental Guide",
+  "version": "1.0.0",
+  "description": "Shows IMDb Parents Guide info inside Netflix pages (uses imdbapi.dev). Configure API key in Options.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://www.netflix.com/*",
+    "https://imdbapi.dev/*",
+    "https://*.imdbapi.dev/*"
+  ],
+  "background": {
+    "service_worker": "service_worker.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "IMDb Parental Guide"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.netflix.com/*"],
+      "js": ["content_script.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["styles.css"],
+      "matches": ["https://www.netflix.com/*"]
+    }
+  ]
+}
